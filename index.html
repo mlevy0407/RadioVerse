@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#071017">
+  <meta name="description" content="Explore the world through independent radio stations.">
+  <title>RadioVerse | Explore the World Through Radio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://unpkg.com/globe.gl@2.43.0/dist/globe.gl.min.js"></script>
+  <script defer src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js"></script>
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#explore" aria-label="RadioVerse home">
+        <span class="brand-mark"><i data-lucide="radio"></i></span>
+        <span>radio<span class="brand-light">verse</span><span class="brand-dot">.</span></span>
+      </a>
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-link active" data-view="explore" type="button">Explore</button>
+        <button class="nav-link" data-view="favorites" type="button">Favorites <span id="favorite-count" class="nav-count">0</span></button>
+      </nav>
+      <div class="header-end"><span class="online-dot"></span> YOUR WORLD, IN SOUND</div>
+    </header>
+
+    <main id="explore" class="workspace">
+      <section class="world" aria-labelledby="page-title">
+        <div class="world-heading">
+          <div class="eyebrow"><span class="eyebrow-line"></span> A WORLD OF SOUND AWAITS</div>
+          <h1 id="page-title">The World<br>Is <span>On Air.</span></h1>
+          <p>Explore cultures, discover sounds,<br class="desktop-break"> and tune into the world.</p>
+        </div>
+
+        <div class="globe-stage">
+          <div id="globe" aria-label="Interactive globe with radio station markers"></div>
+          <div id="globe-status" class="globe-status" role="status">Preparing your world...</div>
+          <div class="globe-label globe-label-left"><span class="crosshair">+</span><span>ONE PLANET<br><strong>ENDLESS FREQUENCIES</strong></span></div>
+          <div class="globe-label globe-label-right"><span>LIVE SIGNALS<br><strong>ACROSS THE GLOBE</strong></span><span class="crosshair">+</span></div>
+        </div>
+
+        <div class="world-bottom">
+          <button id="discover" class="discover-button" type="button"><i data-lucide="shuffle"></i><span>Take Me Somewhere</span><i data-lucide="arrow-up-right" class="button-arrow"></i></button>
+          <div class="world-note"><span class="orbit-icon"><i data-lucide="move-3d"></i></span><span>YOUR NEXT FAVORITE SOUND<br><strong>IS OUT THERE SOMEWHERE.</strong></span></div>
+          <div class="globe-controls" aria-label="Globe zoom controls"><button id="zoom-out" type="button" title="Zoom out" aria-label="Zoom out"><i data-lucide="minus"></i></button><button id="zoom-in" type="button" title="Zoom in" aria-label="Zoom in"><i data-lucide="plus"></i></button></div>
+        </div>
+      </section>
+
+      <aside class="sidebar" aria-label="Radio player and stations">
+        <section class="player" aria-labelledby="player-heading">
+          <div class="section-topline"><span><span class="tiny-dot"></span> THE LISTENING ROOM</span><span class="section-index">01 / 02</span></div>
+          <div class="player-heading"><h2 id="player-heading">Now playing</h2><span class="live-badge"><span></span> LIVE RADIO</span></div>
+          <div class="station-art" id="station-art">
+            <div class="art-grid"></div><div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-center"><i data-lucide="radio"></i><span id="art-initials">RV</span><img id="station-logo" alt="" hidden></div>
+            <div class="art-caption"><span>RADIOVERSE</span><span>GLOBAL FREQUENCY / 001</span></div>
+            <div class="art-frequency">FM <span> / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /</span></div>
+          </div>
+          <div class="station-meta"><div class="station-copy"><h3 id="station-name">Your journey starts here</h3><p id="station-detail">Select a station to tune in</p></div><button id="favorite" class="icon-button favorite-button" type="button" aria-label="Add station to favorites" title="Add to favorites" disabled><i data-lucide="heart"></i></button></div>
+          <div class="player-controls"><button id="play" class="play-button" type="button" aria-label="Play station" title="Play station" disabled><i data-lucide="play"></i></button><div class="waveform" id="waveform" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div><span id="playback-label" class="playback-label">OFF AIR</span></div>
+          <div class="volume-row"><i data-lucide="volume-2"></i><label for="volume">VOLUME</label><input id="volume" type="range" min="0" max="1" step="0.01" value="0.7"><span id="volume-value">70%</span></div>
+          <p id="player-message" class="player-message" role="status" aria-live="polite"></p>
+          <audio id="audio" preload="none"></audio>
+        </section>
+
+        <section class="station-browser" aria-labelledby="browser-heading">
+          <div class="section-topline"><span><span class="tiny-dot"></span> FIND YOUR FREQUENCY</span><span class="section-index">02 / 02</span></div>
+          <div class="browser-heading"><div><h2 id="browser-heading">Explore stations</h2><p id="results-count">A little bit of everywhere</p></div><i data-lucide="radio-tower"></i></div>
+          <div class="search-wrap"><i data-lucide="search"></i><input id="search" type="search" placeholder="Search stations, countries..." aria-label="Search stations"></div>
+          <div class="filters"><label><span class="sr-only">Filter by country</span><select id="country-filter"><option value="">All countries</option></select></label><label><span class="sr-only">Filter by genre</span><select id="genre-filter"><option value="">All genres</option></select></label></div>
+          <div id="station-list" class="station-list" aria-live="polite"></div>
+        </section>
+      </aside>
+    </main>
+    <footer><span>RADIOVERSE <span class="footer-dot">&#9679;</span> A WORLD OF SOUND</span><span>MADE FOR CURIOUS LISTENERS</span><span>EST. EVERYWHERE</span></footer>
+  </div>
+</body>
+</html>
